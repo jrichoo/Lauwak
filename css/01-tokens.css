@@ -1,0 +1,105 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f9f7f2;
+  --surface: #ffffff;
+  --surface-hover: #fcfaf7;
+  --text: #2d2420;
+  --primary-cube: #0003d1;
+  --text-secondary: #7c6f64;
+  --primary: #b23a2b;
+  --gray: rgba(186, 186, 186, 0.57);
+  --primary-hover: #8b2d22;
+  --primary-light: #fbebe6;
+  --success: #10b981;
+  --success-light: #d1fae5;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --primary2: #ecec1847;
+  --danger: #ff0000;
+  --flash: #b23a2b;
+  --danger-light: #fad2d2;
+  --accent: #d97706;
+  --border: #e5ded5;
+  --shadow: 0 4px 12px -2px rgba(45, 36, 32, 0.08);
+  --shadow-lg: 0 12px 24px -4px rgba(45, 36, 32, 0.12);
+  --radius: 12px;
+  --radius-lg: 16px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --scroll-thumb: rgba(45, 36, 32, 0.28);
+  --scroll-thumb-hover: rgba(45, 36, 32, 0.45);
+  --font-brand: "Paytone One", "Space Grotesk", sans-serif;
+  --font-display: "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+  --border-strong: #b7aa9c;
+  --radius-control: 14px;
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+[data-theme="dark"] {
+  --bg: #1a1614;
+  --surface: #2d2622;
+  --surface-hover: #3d342f;
+  --text: #f5f1ed;
+  --text-secondary: #b0a49b;
+  --primary: #e25a4b;
+  --primary-hover: #d14a3b;
+  --primary-light: #4d3e3a;
+  --success: #34d399;
+  --success-light: #064e3b;
+  --warning: #fbbf24;
+  --warning-light: #78350f;
+  --danger: #f87171;
+  --flash: #e25a4b;
+  --danger-light: #7f1d1d;
+  --accent: #d97706;
+  --border: #3d342f;
+  --shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.6);
+  --scroll-thumb: rgba(245, 241, 237, 0.2);
+  --scroll-thumb-hover: rgba(245, 241, 237, 0.35);
+  --border-strong: #6b5d54;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.light,
+.dark {
+  width: 30px;
+  border: none;
+  background-color: transparent;
+}
+
+.light {
+  background: transparent;
+}
+
+.theme-img {
+  width: 30px;
+  border: none;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  transition: var(--transition);
+}
+
+/* Keyboard focus was invisible: the form rules only ever did `outline: none`.
+   An outline (not a box-shadow) so it can't clobber elevation shadows. */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+

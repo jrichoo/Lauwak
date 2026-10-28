@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study Portal | Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Plus+Jakarta+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="card" id="card">
+        <!-- FRONT: log in + reset password -->
+        <div class="face front">
+          <div class="pane" id="loginPane">
+            <div class="header">
+              <h2 class="welcome">Welcome Back</h2>
+              <p>Enter your details to continue</p>
+            </div>
+
+            <div class="inputs">
+              <div class="input-group">
+                <i class="material-icons">mail</i>
+                <input
+                  id="loginEmail"
+                  type="email"
+                  placeholder="Email Address"
+                  autocomplete="email"
+                />
+              </div>
+
+              <div class="input-group">
+                <i class="material-icons">lock</i>
+                <input
+                  class="password"
+                  id="loginPassword"
+                  type="password"
+                  placeholder="Password"
+                  autocomplete="current-password"
+                />
+                <button
+                  type="button"
+                  class="toggle-eye"
+                  aria-label="Show password"
+                >
+                  <i class="material-icons">visibility_off</i>
+                </button>
+              </div>
+            </div>
+
+            <p class="auth-msg" id="loginMsg" role="alert"></p>
+            <button type="button" class="submit" id="loginBtn">Log in</button>
+            <div class="footer">
+              <button type="button" class="frgt-btn" id="forgotBtn">
+                Forgot your password?
+              </button>
+              <br />
+              Don't have an account? <span id="joinLink">Join now</span>
+            </div>
+          </div>
+
+          <!-- step 2 of the card: one email -> one code -> one new password -->
+          <div class="pane" id="resetPane" hidden>
+            <div class="header">
+              <h2 class="welcome">Reset password</h2>
+              <p id="resetHint">
+                Enter your email and we'll send you a 6-digit code.
+              </p>
+            </div>
+
+            <div class="inputs">
+              <div class="input-group">
+                <i class="material-icons">mail</i>
+                <input
+                  id="resetEmail"
+                  type="email"
+                  placeholder="Email Address"
+                  autocomplete="email"
+                />
+              </div>
+
+              <div class="input-group" id="resetCodeRow">
+                <i class="material-icons">dialpad</i>
+                <input
+                  id="resetCode"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="6"
+                  placeholder="0 0 0 0 0 0"
+                  autocomplete="one-time-code"
+                />
+              </div>
+
+              <div class="input-group" id="resetPwRow">
+                <i class="material-icons">lock</i>
+                <input
+                  class="password"
+                  id="resetPassword"
+                  type="password"
+                  maxlength="64"
+                  placeholder="New password"
+                  autocomplete="new-password"
+                />
+                <button
+                  type="button"
+                  class="toggle-eye"
+                  aria-label="Show password"
+                >
+                  <i class="material-icons">visibility_off</i>
+                </button>
+              </div>
+            </div>
+
+            <p class="code-timer" id="resetTimer"></p>
+            <p class="auth-msg" id="resetMsg" role="alert"></p>
+            <button type="button" class="submit" id="resetBtn">
+              Send code
+            </button>
+            <div class="footer footer-col">
+              <button type="button" class="frgt-btn" id="resetResendBtn" hidden>
+                Send a new code
+              </button>
+              <button type="button" class="frgt-btn" id="resetBackBtn">
+                Back to log in
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- BACK: sign up + confirm the emailed code -->
+        <div class="face back">
+          <div class="pane" id="signupPane">
+            <div class="header">
+              <h2>Create account</h2>
+              <p>Study with us!</p>
+            </div>
+
+            <div class="inputs">
+              <div class="input-group">
+                <i class="material-icons">person</i>
+                <input
+                  class="name"
+                  id="signupName"
+                  type="text"
+                  placeholder="Full name"
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="input-group">
+                <i class="material-icons">mail</i>
+                <input
+                  class="email"
+                  id="signupEmail"
+                  type="email"
+                  placeholder="Email Address"
+                  autocomplete="email"
+                />
+              </div>
+
+              <div class="input-group">
+                <i class="material-icons">lock</i>
+                <input
+                  class="password"
+                  id="signupPassword"
+                  type="password"
+                  placeholder="Create Password"
+                  maxlength="64"
+                  autocomplete="new-password"
+                />
+
+                <button
+                  type="button"
+                  class="toggle-eye"
+                  aria-label="Show password"
+                >
+                  <i class="material-icons">visibility_off</i>
+                </button>
+              </div>
+
+              <div class="pw-meta">
+                <div class="pw-bar"><span id="pwBarFill"></span></div>
+                <p id="lakas"></p>
+              </div>
+            </div>
+
+            <p class="auth-msg" id="signupMsg" role="alert"></p>
+            <button type="button" class="submit" id="signupBtn">Sign up</button>
+            <div class="footer">
+              Already have an account?
+              <span id="loginLink">Log in</span>
+            </div>
+          </div>
+
+          <!-- confirm email -->
+
+          <div class="pane" id="verifyPane" hidden>
+            <div class="header">
+              <h2>Confirm your email</h2>
+              <p>
+                Sent a 6-digit code to
+                <b id="verifyAddr"></b>.
+              </p>
+            </div>
+
+            <div class="inputs">
+              <div class="input-group">
+                <i class="material-icons">dialpad</i>
+                <input
+                  id="verifyCode"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="6"
+                  placeholder="0 0 0 0 0 0"
+                  autocomplete="one-time-code"
+                />
+              </div>
+            </div>
+
+            <p class="code-timer" id="verifyTimer"></p>
+            <p class="auth-msg" id="verifyMsg" role="alert"></p>
+            <button type="button" class="submit" id="verifyBtn">
+              Confirm code
+            </button>
+            <div class="footer footer-col">
+              <button type="button" class="frgt-btn" id="resendBtn">
+                Send a new code
+              </button>
+              <button type="button" class="frgt-btn" id="verifyEditBtn">
+                Wrong email or name? Start over
+              </button>
+              <button type="button" class="frgt-btn" id="verifyBackBtn">
+                Back to log in
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll(".toggle-eye").forEach((btn) => {
+        const input = btn.parentElement.querySelector("input");
+        const icon = btn.querySelector(".material-icons");
+
+        btn.addEventListener("click", () => {
+          const showing = input.type === "text";
+          input.type = showing ? "password" : "text";
+          icon.textContent = showing ? "visibility_off" : "visibility";
+          btn.classList.toggle("active", !showing);
+          btn.setAttribute(
+            "aria-label",
+            showing ? "Show password" : "Hide password",
+          );
+        });
+      });
+
+      // ---------- length counter + bar (sign-up only) ----------
+      const signupPw = document.getElementById("signupPassword");
+      const lakas = document.getElementById("lakas");
+      const fill = document.getElementById("pwBarFill");
+      const MIN = 8;
+      const MAX = signupPw.maxLength;
+      signupPw.addEventListener("input", () => {
+        const len = signupPw.value.length;
+        lakas.textContent = `${len} / ${MAX} (min ${MIN})`;
+        fill.style.width = `${(len / MAX) * 100}%`;
+
+        if (len < MIN) {
+          fill.style.background = "#e74c3c";
+          lakas.style.color = "#e74c3c"; // too short
+          lakas.textContent = "Weak";
+        } else if (len < 12) {
+          fill.style.background = "#f39c12";
+          lakas.style.color = "#f39c12"; // okay
+          lakas.textContent = "Good";
+        } else {
+          fill.style.background = "#2ecc71";
+          lakas.style.color = "#2ecc71"; // good
+          lakas.textContent = "Strong";
+        }
+      });
+    </script>
+    <script src="login.js"></script>
+  </body>
+</html>

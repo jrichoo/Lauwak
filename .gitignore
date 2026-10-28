@@ -1,0 +1,6 @@
+.env
+node_modules/
+server/data/
+backend/.venv/
+__pycache__/
+*.pyc

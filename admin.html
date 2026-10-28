@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lauwak | Admin dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="css/01-tokens.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <header class="ad-top">
+      <a href="/" class="ad-brand"
+        ><i class="material-icons">arrow_back</i> Lauwak</a
+      >
+      <h1>Admin dashboard</h1>
+      <span class="ad-me" id="adMe"></span>
+    </header>
+
+    <main class="ad-main">
+      <p class="ad-msg" id="adMsg" role="alert" hidden></p>
+
+      <section class="ad-kpis" aria-label="Summary">
+        <div class="ad-kpi"><b id="kUsers">–</b><span>Total users</span></div>
+        <div class="ad-kpi"><b id="kNew">–</b><span>New this week</span></div>
+        <div class="ad-kpi">
+          <b id="kActive">–</b><span>Logged in, last 24h</span>
+        </div>
+        <div class="ad-kpi">
+          <b id="kSessions">–</b><span>Active sessions</span>
+        </div>
+        <div class="ad-kpi warn">
+          <b id="kFailed">–</b><span>Failed logins, 24h</span>
+        </div>
+      </section>
+
+      <section class="ad-card">
+        <h2>Sign-ups, last 14 days</h2>
+        <div
+          class="ad-chart"
+          id="adChart"
+          role="img"
+          aria-label="Sign-ups per day"
+        ></div>
+      </section>
+
+      <section class="ad-card">
+        <div class="ad-head">
+          <h2>Users</h2>
+          <input
+            id="adSearch"
+            class="ad-input"
+            type="search"
+            placeholder="Search name or email"
+          />
+        </div>
+        <div class="ad-table-wrap">
+          <table class="ad-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Last login</th>
+                <th>Logins</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="adUsers"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="ad-card">
+        <h2>Recent activity</h2>
+        <ul class="ad-events" id="adEvents"></ul>
+      </section>
+    </main>
+
+    <script src="js/admin.js"></script>
+  </body>
+</html>

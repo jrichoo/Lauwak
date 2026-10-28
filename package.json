@@ -1,0 +1,13 @@
+{
+  "name": "lauwak-flashcard-quiz",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "description": "Lauwak flashcard app with Corvus AI backend",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js"
+  }
+}

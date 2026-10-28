@@ -1,0 +1,350 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f9f7f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 16px;
+  /* Same family the app uses, so the login page and the portal read as one. */
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  color: #2d3436;
+}
+
+.container {
+  width: min(380px, 100%);
+  height: min(540px, calc(100vh - 32px));
+  height: min(540px, calc(100svh - 32px));
+  perspective: 1500px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 24px;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  /* Short viewports must scroll the form, not clip the sign-up fields. */
+  overflow-y: auto;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+/* Log in has two fields, sign-up has four, and both faces share one card height.
+   Auto margins centre the short side, and collapse to zero if it ever overflows
+   (`justify-content: center` would clip its top instead). */
+
+/* ---------- header ---------- */
+.header {
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-family: "Paytone One", sans-serif;
+  font-size: clamp(22px, 6vw, 28px);
+  font-weight: 400;
+  margin: 0;
+  color: #8b2d22;
+}
+
+.header p {
+  font-size: 14px;
+  color: #7c6f64;
+  opacity: 0.8;
+  margin: 8px 0 0;
+}
+
+/* ---------- inputs ---------- */
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.input-group {
+  position: relative;
+}
+
+/* left icon only (direct child) */
+.input-group > .material-icons {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #9aa5b1;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 16px 14px 46px; /* left room for icon */
+  border: 1.5px solid #edf2f7;
+  border-radius: 12px;
+  background: #f9f7f2;
+  font-family: inherit;
+  /* 16px is the smallest size iOS Safari will focus without zooming in. */
+  font-size: 14px;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.frgt-btn {
+  background: none;
+  border: none;
+  color: #8b2d22;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 4px;
+  transition:
+    color 0.2s,
+    text-decoration 0.2s;
+}
+.frgt-btn:hover {
+  color: #8b2d22;
+  text-decoration: underline;
+}
+
+.input-group input.password {
+  padding-right: 46px; /* right room for eye */
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #8b2d22;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(139, 45, 34, 0.1);
+}
+
+.input-group:focus-within > .material-icons {
+  color: #8b2d22;
+}
+
+/* ---------- eye toggle ---------- */
+.toggle-eye {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: #9aa5b1;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+
+.toggle-eye .material-icons {
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.toggle-eye:hover,
+.toggle-eye.active {
+  color: #8b2d22;
+}
+
+.toggle-eye:hover {
+  background: rgba(139, 45, 34, 0.08);
+}
+
+/* ---------- length indicator ---------- */
+.pw-meta {
+  margin-top: -6px;
+}
+
+.pw-bar {
+  height: 4px;
+  background: #e5e5e5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pw-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: #e74c3c;
+  transition:
+    width 0.2s,
+    background 0.2s;
+}
+
+.pw-meta p {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #888;
+  text-align: right;
+}
+
+/* ---------- button + footer ---------- */
+.submit {
+  width: 100%;
+  padding: 14px;
+  margin-top: auto; /* pushes button + footer to the bottom */
+  background: #8b2d22;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+
+.submit:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer span {
+  color: #8b2d22;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.footer span:hover {
+  text-decoration: underline;
+}
+
+.auth-msg {
+  display: block;
+
+  min-height: 1.2em;
+  padding: 20px;
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #e74c3c;
+  text-align: center;
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* ---------- steps inside a face ---------- */
+/* One face holds two steps (login/reset, sign-up/confirm) so the 3D flip never
+   mirrors a panel. The pane fills the face and keeps .submit's auto margin
+   pushing the button and footer to the bottom, exactly as before. */
+.face > .pane {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+  min-height: 0;
+}
+
+#resetPwRow .submit {
+  margin-top: 20px;
+}
+
+/* .face > .pane beats the browser's [hidden] rule, so say it again. */
+.pane[hidden],
+.input-group[hidden] {
+  display: none;
+}
+
+/* A 6-digit code reads better spaced out and centred. */
+#resetCode,
+#verifyCode {
+  text-align: center;
+  letter-spacing: 0.35em;
+  padding-left: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Green for "check your inbox", red stays for problems. */
+.auth-msg.ok {
+  color: #27ae60;
+}
+
+/* ---------- the code countdown ---------- */
+/* Sits between the code box and the error line: seconds left, then what to do. */
+.code-timer {
+  margin: -14px 0 4px;
+  font-size: 12px;
+  color: #7c6f64;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.code-timer.warn {
+  color: #e74c3c;
+}
+
+/* No code mailed yet means no line at all, not a gap in the card. */
+.code-timer:empty {
+  display: none;
+}
+
+/* Two stacked text buttons, without a <br> that shows as a blank line when one
+   of them is hidden. */
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* The resend button doubles as the cooldown countdown. */
+.frgt-btn:disabled {
+  color: #9aa5b1;
+  cursor: wait;
+  text-decoration: none;
+}
+
+@media (max-width: 400px) {
+  .container {
+    transform: scale(0.85);
+  }
+}

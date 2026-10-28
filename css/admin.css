@@ -1,0 +1,248 @@
+/* Admin dashboard (uses tokens from 01-tokens.css) */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+}
+.ad-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.ad-top h1 {
+  margin: 0;
+  font-size: 1.2rem;
+  flex: 1;
+}
+.ad-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+.ad-me {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+.ad-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 20px;
+}
+.ad-msg {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--danger-light);
+  color: var(--primary-hover);
+  font-weight: 600;
+}
+.ad-kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
+}
+.ad-kpi {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 16px 18px;
+  box-shadow: var(--shadow);
+}
+.ad-kpi b {
+  display: block;
+  font-size: 1.8rem;
+  font-variant-numeric: tabular-nums;
+}
+.ad-kpi span {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+.ad-kpi.warn b {
+  color: var(--primary);
+}
+.ad-card {
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
+}
+.ad-card h2 {
+  margin: 0 0 14px;
+  font-size: 1.05rem;
+}
+.ad-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.ad-head h2 {
+  margin: 0;
+}
+.ad-input {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  min-width: 240px;
+}
+.ad-chart {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 6px;
+  height: 140px;
+  align-items: end;
+}
+.ad-bar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+.ad-bar span {
+  width: 100%;
+  min-height: 3px;
+  border-radius: 4px 4px 0 0;
+  background: var(--primary);
+}
+.ad-bar small {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+.ad-table-wrap {
+  overflow-x: auto;
+}
+.ad-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.ad-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.ad-table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.ad-table td:nth-child(5) {
+  font-variant-numeric: tabular-nums;
+}
+.ad-tag {
+  font-style: normal;
+  font-size: 0.7rem;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.ad-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.ad-status.on {
+  background: var(--success-light);
+  color: #047857;
+}
+.ad-status.off {
+  background: var(--danger-light);
+  color: var(--primary-hover);
+}
+.ad-actions {
+  display: flex;
+  gap: 6px;
+}
+.ad-actions button {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.ad-actions button:hover {
+  border-color: var(--primary);
+}
+.ad-actions button.danger {
+  color: var(--primary);
+}
+.ad-actions button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.ad-empty {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 18px;
+}
+.ad-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ad-events li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  font-size: 0.88rem;
+}
+.ad-events li + li {
+  border-top: 1px solid var(--border);
+}
+.ad-events li.bad span {
+  color: var(--primary);
+  font-weight: 600;
+}
+.ad-events small {
+  margin-left: auto;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+[data-theme="dark"] .ad-status.on {
+  color: #a7f3d0;
+}
+[data-theme="dark"] .ad-status.off,
+[data-theme="dark"] .ad-msg {
+  color: #fecaca;
+}
+@media (max-width: 640px) {
+  .ad-main {
+    padding: 14px;
+  }
+  .ad-input {
+    min-width: 0;
+    width: 100%;
+  }
+  .ad-chart {
+    height: 110px;
+    gap: 3px;
+  }
+}

@@ -1,0 +1,295 @@
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  flex: 1;
+  overscroll-behavior: contain;
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.reset-warning {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--accent);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 1rem;
+  background: var(--surface);
+  color: var(--text);
+  transition: var(--transition);
+  border: 1px solid var(--border-strong);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 1;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: var(--focus-ring);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+/* `appearance: base-select` is what makes ::picker-icon and ::picker(select)
+   stylable. Browsers without it keep their own arrow, so no rule here is
+   load-bearing for the control to work. */
+select,
+select::picker(select) {
+  appearance: base-select;
+}
+
+select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.prefs-group select {
+  font-size: 0.875rem;
+}
+
+/* The arrow lives in ../assets/icons/, not assets/images/ — the old path 404ed.
+   No !important: it used to beat the dark-theme rule below, so dark mode always
+   got the near-black arrow. */
+select::picker-icon {
+  content: "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.8rem;
+  height: 0.8rem;
+  background: url("../assets/icons/down.svg") center / contain no-repeat;
+  transition: rotate 0.2s ease;
+}
+
+[data-theme="dark"] select::picker-icon {
+  background-image: url("../assets/icons/white-down.svg");
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+}
+
+select::picker(select) {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  padding: 6px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: var(--shadow-lg);
+}
+
+option {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+option:hover {
+  background: var(--primary-light);
+}
+
+option:checked {
+  background: var(--primary);
+  color: #fff;
+}
+
+.category-tag {
+  padding: 6px 14px;
+  background: var(--primary-light);
+  color: var(--primary);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.category-tag:hover,
+.category-tag.active {
+  background: var(--primary);
+  color: white;
+}
+
+.category-tag.active {
+  background: var(--primary);
+  color: white;
+}
+
+.flashcard-list {
+  display: grid;
+  gap: 12px;
+}
+
+.flashcard-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.flashcard-item:hover {
+  border-color: var(--primary);
+}
+
+.flashcard-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.flashcard-item-term {
+  font-weight: 600;
+  margin-bottom: 4px;
+  overflow-wrap: anywhere;
+}
+
+.flashcard-item-definition {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.flashcard-item-tags {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.flashcard-item-tags .tag {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.flashcard-item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.flashcard-item-actions .trash-bin,
+.flashcard-item-actions .pen-icon,
+.flashcard-item-actions .edit-category-icon {
+  width: 20px;
+}
+.code-item-actions .trash-bin,
+.code-item-actions .pen-icon {
+  width: 20px;
+}
+
+.flashcard-item-actions .pen-icon {
+  width: 20px;
+}
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--surface-hover);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.icon-btn:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.icon-btn.delete:hover {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+/* Below 16px iOS Safari zooms the page in on focus and never zooms back out, so
+   every control goes full size on phones. This sits last in the file because the
+   shrink rules above it (and in 05-quiz.css) have equal specificity. */
+@media (max-width: 640px) {
+  .form-input,
+  .form-textarea,
+  .form-select,
+  .quiz-settings-panel .form-select,
+  .prefs-group select,
+  :root[data-text-size] #typeAnswer {
+    font-size: 1rem;
+  }
+
+  /* The study/quiz rows trim padding below the 44px comfortable tap target. */
+  .form-input,
+  .form-select {
+    min-height: 44px;
+  }
+}

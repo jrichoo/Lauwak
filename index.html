@@ -1,0 +1,1297 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta
+      name="description"
+      content="StudyMaster AI - your intelligent study companion with AI-powered flashcards, spaced repetition, quizzes, and progress tracking."
+    />
+    <meta name="theme-color" content="#b23a2b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Lauwak" />
+    <link rel="manifest" href="assets/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="assets/icons/icon-180.png" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Lauwak- Flashcards & Quizzes</title>
+    <link rel="icon" href="assets/icons/icon-192.png" />
+    <link rel="stylesheet" href="css/01-tokens.css" />
+    <link rel="stylesheet" href="css/02-base.css" />
+    <link rel="stylesheet" href="css/03-layout.css" />
+    <link rel="stylesheet" href="css/04-study.css" />
+    <link rel="stylesheet" href="css/05-quiz.css" />
+    <link rel="stylesheet" href="css/06-modals-forms.css" />
+    <link rel="stylesheet" href="css/07-components.css" />
+    <link rel="stylesheet" href="css/08-code-practice.css" />
+    <link rel="stylesheet" href="css/09-responsive.css" />
+    <link rel="stylesheet" href="css/10-nav-chat.css" />
+    <link rel="stylesheet" href="css/11-preferences.css" />
+    <link rel="stylesheet" href="css/12-flashcards-chat-cards.css" />
+    <link rel="stylesheet" href="css/13-home.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Paytone+One&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=page_info"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="js/core.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/cards.js" defer></script>
+    <script src="js/home.js" defer></script>
+    <script src="js/study.js" defer></script>
+    <script src="js/quiz.js" defer></script>
+    <script src="js/ai.js" defer></script>
+    <script src="js/stats.js" defer></script>
+    <script src="js/code.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">LAUWAK</div>
+        <nav class="nav-links">
+          <button class="nav-btn active" data-section="home">Home</button>
+          <button class="nav-btn" data-section="flashcards">Flashcards</button>
+          <button class="nav-btn" data-section="study">Study</button>
+          <button class="nav-btn" data-section="quiz">Quiz</button>
+          <button class="nav-btn" data-section="code">Code</button>
+          <button class="nav-btn" data-section="stats">Stats</button>
+        </nav>
+        <div class="action-btn">
+          <button
+            class="prefs-toggle"
+            id="prefsToggle"
+            onclick="app.togglePrefs()"
+            aria-label="Preferences"
+            title="Preferences"
+          >
+            <span class="material-symbols-outlined"> page_info </span>
+          </button>
+          <button class="theme-toggle" id="themeToggle">
+            <img class="theme-img" src="assets/images/sunn.png" />
+          </button>
+          <button
+            class="prefs-toggle logout-btn"
+            id="logoutBtn"
+            onclick="app.logout()"
+            aria-label="Log out"
+            title="Log out"
+          >
+            <i class="material-icons">logout</i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Home Section -->
+    <div class="container">
+      <section id="home" class="section active home-classic">
+        <div class="hd-m-topbar m-only">
+          <button class="hd-streak" onclick="app.showSection('stats')" aria-label="Day streak: open stats">
+            <img src="assets/images/fire-red.png" alt="" />
+            <span class="hd-streak-count" id="hdStreakBadge">0</span>
+          </button>
+        
+        </div>
+        <p class="hd-date m-only" id="homeDate"></p>
+        <div class="home-cols">
+          <div class="home-main">
+        <div class="home-hero">
+          <div class="mascot-col">
+            <div class="mascot-bubble">
+              <p class="firstMsg" id="mascotMsg">Hi! Ready to study?</p>
+            </div>
+            <img id="my-mascot" class="mascot-gif" src="assets/gif/gemini_generated_video_6084e35c-ezgif.com-remove-background (5).gif" alt="Lauwak mascot" />
+          </div>
+          <div class="hero-text">
+            <h1 class="welcome-title" id="homeGreeting">Welcome to Lauwak</h1>
+            <p class="section-subtitle">Your intelligent study companion with AI-powered learning</p>
+          </div>
+        </div>
+
+        <div class="hd-session" id="hdSession">
+          <h2 class="hd-h2">Today's session</h2>
+          <p class="hd-session-meta" id="hdSessionMeta">–</p>
+          <div class="hd-session-bar"><span id="hdSessionBar"></span></div>
+          <p class="hd-session-goal" id="hdSessionGoal"></p>
+          <button class="hd-session-focus" id="hdSessionFocus" hidden></button>
+          <button class="btn btn-primary hd-session-btn" id="hdSessionBtn">Start studying</button>
+          <span hidden id="hdStreak2"></span>
+        </div>
+
+        <div class="hd-card hd-resume" id="hdResume" hidden>
+          <div><h3 class="hd-card-title">Continue where you left off</h3><p class="hd-muted" id="hdResumeText"></p></div>
+          <button class="btn btn-primary" onclick="app.resumeStudy()">Resume</button>
+        </div>
+
+        <form class="hd-card hd-ask" onsubmit="event.preventDefault();app.askCorvusFromHome()">
+          <label for="hdAskInput" class="hd-card-title">Ask Corvus</label>
+          <div class="hd-ask-row"><input id="hdAskInput" class="form-input" placeholder="Ask a question" autocomplete="off" /><button class="btn btn-primary" type="submit" aria-label="Send to Corvus"><i class="material-icons">send</i></button></div>
+        </form>
+
+        <div class="grid grid-3 home-features">
+          <div class="card feature-card" onclick="app.showSection('flashcards')">
+            <div class="feature-title">Create Flashcards</div>
+            <div class="feature-desc">Build your deck with terms and definitions</div>
+          </div>
+          <div class="card feature-card" onclick="app.showSection('study')">
+            <div class="feature-title">Smart Study</div>
+            <div class="feature-desc">Spaced repetition for optimal retention</div>
+          </div>
+          <div class="card feature-card" onclick="app.showSection('quiz')">
+            <div class="feature-title">Take Quiz</div>
+            <div class="feature-desc">Test your knowledge with AI quizzes</div>
+          </div>
+        </div>
+
+        <div class="m-only hd-crow-row">
+          <img class="hd-crow" src="assets/gif/ezgif.com-remove-background (1).gif" alt="Scholar crow mascot" loading="lazy" />
+          <div class="hd-crow-bubble" id="statsMascotMsg">Let's see how you're doing!</div>
+        </div>
+          </div>
+          <div class="home-side">
+        <div class="grid grid-4 home-stats" style="margin-bottom: 30px">
+          <div class="card stat-card"><div class="stat-value" id="totalCards">0</div><div class="stat-label">Total Cards</div><div class="stat-delta" id="delta_totalCards"></div></div>
+          <div class="card stat-card"><div class="stat-value" id="masteredCards">0</div><div class="stat-label">Mastered</div><div class="stat-delta" id="delta_masteredCards"></div></div>
+          <div class="card stat-card"><div class="stat-value" id="streakCount">0</div><div class="stat-label">Day Streak</div><div class="stat-delta" id="delta_streakCount"></div></div>
+          <div class="card stat-card"><div class="stat-value" id="studyTime">0m</div><div class="stat-label">Study Time</div><div class="stat-delta" id="delta_studyTime"></div></div>
+        </div>
+
+        <div class="home-goal-row" style="display: none; margin-top: 30px">
+          <div class="card daily-goal">
+            <div class="goal-circle" id="goalCircle">
+              <svg width="80" height="80">
+                <circle cx="40" cy="40" r="36" fill="none" stroke="var(--border)" stroke-width="4" />
+                <circle id="goalProgress" cx="40" cy="40" r="36" fill="none" stroke="var(--primary)" stroke-width="4" stroke-dasharray="226" stroke-dashoffset="226" stroke-linecap="round" />
+              </svg>
+              <span id="goalPercent">0%</span>
+            </div>
+            <div>
+              <h3>Daily Goal</h3>
+              <p style="color: var(--text-secondary)">Review <span id="goalTarget">20</span> cards today</p>
+              <p style="color: var(--text-secondary); font-size: 0.875rem"><span id="goalCurrent">0</span>/<span id="goalTargetNum">20</span> cards reviewed</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hd-card hd-cal-card">
+          <div class="hd-card-head"><h3 class="hd-card-title">Study activity</h3><span class="hd-muted" id="hdCalSummary"></span></div>
+          <div class="hd-cal" id="hdCal" role="group" aria-label="Cards reviewed per day, last 12 weeks"></div>
+          <p class="hd-cal-tip" id="hdCalTip" role="status" hidden></p>
+          <div class="hd-cal-legend"><span>Less</span><i class="l0"></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>More</span></div>
+        </div>
+
+        <div class="hd-card hd-weak-card" id="hdWeakCard">
+          <div class="hd-card-head"><h3 class="hd-card-title">Weakest cards</h3><button class="hd-text-btn" id="hdWeakBtn">Practise these ›</button></div>
+          <ul class="hd-weak" id="hdWeakList"></ul>
+        </div>
+
+        <div class="tip-card" style="margin-top: 20px">
+          <div class="tip-icon">💡</div>
+          <div class="tip-content">
+            <h4>Study Tip</h4>
+            <p id="dailyTip">Use spaced repetition to review cards just before you forget them. This strengthens long-term memory!</p>
+          </div>
+        </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FLASHCARD SECTION-->
+      <section id="flashcards" class="section">
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Flashcards</h1>
+            <p class="section-subtitle">Manage your flashcard deck</p>
+          </div>
+          <div class="section-header-actions">
+            <label
+              class="select-all-toggle"
+              id="selectAllWrap"
+              style="display: none"
+            >
+              <input
+                type="checkbox"
+                id="selectAllCards"
+                onchange="app.toggleSelectAll(this.checked)"
+              />
+              <span>Select all</span>
+            </label>
+            <button
+              class="btn btn-secondary btn-small"
+              id="selectModeBtn"
+              onclick="app.enterSelectionMode()"
+            >
+              Select
+            </button>
+            <button class="btn btn-primary" onclick="app.showAddCardModal()">
+              + Add Card
+            </button>
+          </div>
+        </div>
+
+        <div id="bulkActions" class="bulk-actions" style="display: none">
+          <span id="bulkCount">0 selected</span>
+          <button
+            class="btn btn-secondary btn-small"
+            onclick="app.bulkChangeCategory()"
+          >
+            Change category
+          </button>
+          <button class="btn btn-danger btn-small" onclick="app.bulkDelete()">
+            Delete selected
+          </button>
+          <button
+            class="btn btn-secondary btn-small"
+            onclick="app.exitSelectionMode()"
+          >
+            Cancel
+          </button>
+        </div>
+
+        <div class="search-box">
+          <span class="search-box-icon">
+            <i class="material-icons">search</i>
+          </span>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search flashcards..."
+            id="searchCards"
+            oninput="app.filterCards()"
+          />
+        </div>
+
+        <div
+          class="category-tags"
+          id="categoryFilters"
+          style="margin-bottom: 20px"
+        >
+          <span
+            class="category-tag active"
+            data-category="all"
+            onclick="app.filterByCategory('all')"
+            >All</span
+          >
+        </div>
+
+        <div class="flashcard-list" id="flashcardList">
+          <div class="empty-state">
+            <div class="empty-state-icon">lauwak head</div>
+            <h3>No flashcards yet</h3>
+            <p>Create your first flashcard to start studying!</p>
+            <button
+              class="btn btn-primary"
+              style="margin-top: 16px"
+              onclick="app.showAddCardModal()"
+            >
+              + Create Flashcard
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STUDY SECTION -->
+      <section id="study" class="section">
+        <h1 class="section-title">Study Session</h1>
+        <p class="section-subtitle">Flip the card and rate your recall</p>
+
+        <div class="study-controls">
+          <select
+            class="form-input form-select"
+            id="studyCategory"
+            onchange="app.startStudy()"
+          >
+            <option value="all" class="select-title">All categories</option>
+          </select>
+          <label class="study-shuffle">
+            <input
+              type="checkbox"
+              id="studyShuffle"
+              onchange="app.startStudy()"
+            />
+            Shuffle
+          </label>
+          <span class="study-timer" id="studyTimer"
+            ><i class="material-icons">timer</i> 0:00
+          </span>
+          <button
+            class="study-focus-btn"
+            id="studyFocusBtn"
+            onclick="app.toggleFocusMode()"
+            title="Focus mode (fullscreen)"
+          >
+            ⛶ Focus
+          </button>
+        </div>
+        <button
+          class="focus-exit-btn"
+          id="focusExitBtn"
+          onclick="app.exitFocusMode()"
+          title="Exit focus mode"
+        >
+          ✕
+        </button>
+
+        <div class="flashcard-container" id="studyCardContainer">
+          <div class="flashcard" id="studyFlashcard" onclick="app.flipCard()">
+            <div class="flashcard-face flashcard-front">
+              <div class="flashcard-label" id="studyFrontLabel">Term</div>
+              <div class="flashcard-content" id="studyTerm">
+                Click to start studying!
+              </div>
+              <div class="flashcard-hint">Click to reveal answer</div>
+            </div>
+            <div class="flashcard-face flashcard-back">
+              <div class="flashcard-label" id="studyBackLabel">Definition</div>
+              <div class="flashcard-content" id="studyDefinition"></div>
+              <div class="flashcard-hint">Rate your recall below</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="empty-state" id="studyEmpty" style="display: none">
+          <div class="empty-state-icon"></div>
+          <h3>No cards to study</h3>
+          <p>Add some flashcards first!</p>
+        </div>
+
+        <div class="flashcard-nav">
+          <button class="flashcard-nav-btn" onclick="app.prevStudyCard()">
+            <i class="material-icons">keyboard_arrow_left</i>
+          </button>
+
+          <span class="flashcard-counter" id="studyCounter">0 / 0</span>
+          <button class="flashcard-nav-btn" onclick="app.nextStudyCard()">
+            <i class="material-icons">keyboard_arrow_right</i>
+          </button>
+        </div>
+
+        <div class="difficulty-btns" id="difficultyBtns" style="display: none">
+          <button class="difficulty-btn again" onclick="app.rateCard(0)">
+            Again
+          </button>
+          <button class="difficulty-btn hard" onclick="app.rateCard(1)">
+            Hard
+          </button>
+          <button class="difficulty-btn good" onclick="app.rateCard(2)">
+            Good
+          </button>
+          <button class="difficulty-btn easy" onclick="app.rateCard(3)">
+            Easy
+          </button>
+        </div>
+
+        <div
+          id="studyComplete"
+          style="display: none; text-align: center; padding: 40px"
+        >
+          <div style="font-size: 4rem; margin-bottom: 16px"></div>
+          <h2>Session Complete!</h2>
+          <p style="color: var(--text-secondary); margin-top: 8px">
+            You've reviewed all cards for this session
+          </p>
+          <button
+            class="btn btn-primary"
+            style="margin-top: 20px"
+            onclick="app.startStudy()"
+          >
+            Study Again
+          </button>
+        </div>
+      </section>
+
+      <!-- QUIZ SECTION -->
+    
+      <section id="quiz" class="section">
+            <button
+            id="backHome"
+            onclick="app.backQuiz()"
+            class="back-to-home"
+            style="display: none"
+          >
+            <i class="material-icons">arrow_back</i>return
+          </button>
+        <div class="back-container" style="display: block">
+        </div>
+        <div id="sectionHidden">
+          <h1 class="section-title">Quiz Mode</h1>
+          <p class="section-subtitle">Test your knowledge</p>
+        </div>
+        <div id="tabNav" class="tabs" style="display: flex">
+          <button class="tab" onclick="app.switchQuizType('multiple', event)">
+            Multiple Choice
+          </button>
+          <button class="tab" onclick="app.switchQuizType('truefalse', event)">
+            True/False
+          </button>
+          <button class="tab" onclick="app.switchQuizType('typein', event)">
+            Identification
+          </button>
+          <button class="tab" onclick="app.switchQuizType('match', event)">
+            Matching
+          </button>
+        </div>
+
+        <div id="quizSetup">
+          <div class="card" style="text-align: center; padding: 40px">
+            <h3>Ready to test your knowledge?</h3>
+            <p style="color: var(--text-secondary); margin: 12px 0 24px">
+              Answer questions to earn points and track progress
+            </p>
+            <div
+              class="form-group"
+              style="max-width: 200px; margin: 0 auto 20px"
+            >
+              <label class="form-label">Category</label>
+              <select class="form-input form-select" id="quizCategory">
+                <option value="all">All categories</option>
+              </select>
+            </div>
+            <div
+              class="form-group"
+              style="max-width: 200px; margin: 0 auto 20px"
+            >
+              <label class="form-label">Number of questions</label>
+              <input
+                type="number"
+                placeholder="1-20"
+                class="question-input"
+                id="quizCount"
+                value="10"
+                min="1"
+                max="50"
+              />
+            </div>
+            <button class="btn btn-primary btn-large" onclick="app.startQuiz()">
+              Start Quiz
+            </button>
+          </div>
+        </div>
+
+        <div id="quizActive" style="display: none">
+          <div class="quiz-header">
+            <span style="color: #b23a2b" id="quizQuestionNum"
+              >Question 1/10</span
+            >
+            <span class="streak-badge" id="quizStreak" style="display: none"
+              ><img class="streak-icon" src="assets/images/fire-red.png" />
+              0</span
+            >
+            <span class="quiz-timer" id="quizTimer" style="display: none"
+              >⏱ 20</span
+            >
+          </div>
+          <div class="quiz-progress">
+            <div
+              class="quiz-progress-bar"
+              id="quizProgressBar"
+              style="width: 0%"
+            ></div>
+          </div>
+          <div class="card">
+            <h2
+              id="quizQuestion"
+              style=" margin-bottom: 20px"
+            ></h2>
+            <div id="quizContent"></div>
+            <div class="quiz-container">
+              <div id="quizFeedback"></div>
+              <button
+                id="quizNextBtn"
+                class="btn btn-primary"
+                style="display: none; margin-top: 20px"
+                onclick="app.nextQuizQuestion()"
+              >
+                Next Question
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="quizResults" style="display: none">
+          <div class="card quiz-score">
+            <div class="quiz-score-value" id="quizScorePercent">0%</div>
+            <h2 id="quizScoreText">Great job!</h2>
+            <p style="color: var(--text-secondary); margin: 12px 0">
+              You got <span id="quizScoreCorrect">0</span> out of
+              <span id="quizScoreTotal">0</span> correct
+            </p>
+            <div
+              style="
+                display: flex;
+                justify-content: center;
+                gap: 12px;
+                margin-top: 24px;
+              "
+            >
+              <button class="btn btn-primary" onclick="app.startQuiz()">
+                Try Again
+              </button>
+              <button
+                class="btn btn-secondary"
+                onclick="app.showSection('study')"
+              >
+                Review Cards
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CODE SECTION -->
+      <section id="code" class="section">
+        <h1 class="section-title">Code Practice</h1>
+        <p class="section-subtitle">
+          Add programming questions with answers, then recall them by writing
+        </p>
+
+        <div
+          style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap"
+        >
+          <button
+            class="btn btn-secondary btn-small"
+            onclick="app.exportCodeItems()"
+          >
+            <img class="export-icon" src="assets/images/download.png" />
+            Export
+          </button>
+          <button
+            class="btn btn-secondary btn-small"
+            onclick="document.getElementById('codeImportFile').click()"
+          >
+            <img class="import-icon" src="assets/images/upload.png" />
+            Import
+          </button>
+          <input
+            type="file"
+            id="codeImportFile"
+            accept=".json"
+            style="display: none"
+            onchange="app.importCodeItems(event)"
+          />
+          <span
+            style="font-size: 0.8rem; color: var(--primary); align-self: center"
+          >
+            Saved automatically in this browser
+          </span>
+        </div>
+
+        <div class="tabs">
+          <button class="tab" onclick="app.switchCodeTab('manage', event)">
+            My Questions
+          </button>
+          <button class="tab" onclick="app.switchCodeTab('practice', event)">
+            Practice
+          </button>
+        </div>
+
+        <div id="codeManage">
+          <div class="card" style="margin-bottom: 20px">
+            <h3 style="margin-bottom: 12px" id="codeFormTitle">Add Question</h3>
+            <input type="hidden" id="codeEditId" />
+            <div class="form-group">
+              <label class="form-label">Language</label>
+              <select class="form-input form-select" id="codeLang">
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="C++">C++</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Question / Prompt</label>
+              <textarea
+                class="form-textarea"
+                id="codeQuestion"
+                placeholder="e.g., Write an array of 3 numbers in JavaScript"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Answer (model solution)</label>
+              <textarea
+                class="form-textarea"
+                id="codeAnswer"
+                placeholder="e.g., let arr = [1, 2, 3];"
+              ></textarea>
+            </div>
+            <div style="display: flex; gap: 12px; justify-content: flex-end">
+              <button class="btn btn-secondary" onclick="app.resetCodeForm()">
+                Cancel
+              </button>
+              <button class="btn btn-primary" onclick="app.saveCodeItem()">
+                Save
+              </button>
+            </div>
+          </div>
+          <div id="codeList"></div>
+        </div>
+
+        <div id="codePractice" style="display: none">
+          <div
+            style="
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 16px;
+              flex-wrap: wrap;
+            "
+          >
+            <label class="form-label" style="margin: 0; color: #b23a2b"
+              >Practice language</label
+            >
+            <select
+              class="form-input form-select"
+              id="codePracticeLang"
+              onchange="app.startPractice()"
+              style="width: auto; min-width: 180px"
+            ></select>
+          </div>
+          <div class="card" id="codePracticeCard" style="padding: 20px"></div>
+        </div>
+      </section>
+
+      <!-- STATS ICON-->
+      <section id="stats" class="section">
+        <h1 class="section-title">Statistics</h1>
+        <p class="section-subtitle">Track your study progress</p>
+
+        <div class="grid grid-2" style="margin-bottom: 24px">
+          <div class="card">
+            <h3 style="margin-bottom: 16px">Study History (Last 7 Days)</h3>
+            <div class="progress-chart" id="studyChart"></div>
+          </div>
+          <div class="card">
+            <h3 style="margin-bottom: 16px">Card Mastery</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <span>New</span>
+                  <span id="statNew">0</span>
+                </div>
+                <div class="mastery-bar">
+                  <div
+                    class="mastery-fill mastery-new"
+                    id="statNewBar"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <span>Learning</span>
+                  <span id="statLearning">0</span>
+                </div>
+                <div class="mastery-bar">
+                  <div
+                    class="mastery-fill mastery-learning"
+                    id="statLearningBar"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <span>Review</span>
+                  <span id="statReview">0</span>
+                </div>
+                <div class="mastery-bar">
+                  <div
+                    class="mastery-fill mastery-review"
+                    id="statReviewBar"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+              <div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <span>Mastered</span>
+                  <span id="statMastered">0</span>
+                </div>
+                <div class="mastery-bar">
+                  <div
+                    class="mastery-fill mastery-mastered"
+                    id="statMasteredBar"
+                    style="width: 0%"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-3">
+          <div class="card stat-card">
+            <div
+              class="stat-icon"
+              style="background: var(--primary-light)"
+            ></div>
+            <div class="stat-value" id="statTotalReviews">0</div>
+            <div class="stat-label">Total Reviews</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-icon"></div>
+            <div class="stat-value" id="statAccuracy">0%</div>
+            <div class="stat-label">Accuracy</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-icon"></div>
+            <div class="stat-value" id="statAvgTime">0s</div>
+            <div class="stat-label">Avg. Response Time</div>
+          </div>
+          <div class="card stat-card">
+            <div class="stat-icon"></div>
+            <div class="stat-value" id="statPracticed">0</div>
+            <div class="stat-label">Practiced</div>
+          </div>
+        </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal-overlay" id="resetModal">
+      <div class="modal">
+        <h2 class="modal-title">Reset all data?</h2>
+        <p class="reset-warning">
+          This permanently deletes all your flashcards, code questions, and
+          study progress. A fresh sample deck will be loaded. This can't be
+          undone.
+        </p>
+        <div class="reset-form">
+          <button
+            class="btn btn-secondary"
+            onclick="app.closeModal('resetModal')"
+          >
+            Cancel
+          </button>
+          <button class="btn btn-danger" onclick="app.resetAllData()">
+            Reset All Data
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="addCardModal">
+      <div class="modal">
+        <h2 class="modal-title" id="modalTitle">Add New Flashcard</h2>
+        <input type="hidden" id="editCardId" />
+        <div class="form-group">
+          <label class="form-label">Term / Question</label>
+          <input
+            type="text"
+            class="form-input"
+            id="cardTerm"
+            placeholder="Enter the term or question"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Definition / Answer</label>
+          <textarea
+            class="form-textarea"
+            id="cardDefinition"
+            placeholder="Enter the definition or answer"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select
+            class="form-input form-select"
+            id="cardCategory"
+            onchange="app.onCardCategoryChange()"
+          >
+            <option value="">Select category...</option>
+            <option value="__new__">+ Add new category...</option>
+          </select>
+          <input
+            type="text"
+            class="form-input"
+            id="cardCategoryNew"
+            placeholder="e.g., Science, Math, History"
+            style="display: none; margin-top: 8px"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tags (comma separated)</label>
+          <input
+            type="text"
+            class="form-input"
+            id="cardTags"
+            placeholder="e.g., biology, cells, membrane"
+          />
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end">
+          <button
+            class="btn btn-secondary"
+            onclick="app.closeModal('addCardModal')"
+          >
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="app.saveCard()">
+            Save Card
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="categoryModal">
+      <div class="modal">
+        <h2 class="modal-title">Edit Category</h2>
+        <input type="hidden" id="categoryCardId" />
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select
+            class="form-input form-select"
+            id="categorySelect"
+            onchange="app.onCategoryModalChange()"
+          >
+            <option value="">Select category...</option>
+            <option value="__new__">+ Add new category...</option>
+          </select>
+          <input
+            type="text"
+            class="form-input"
+            id="categorySelectNew"
+            placeholder="e.g., Science, Math, History"
+            style="display: none; margin-top: 8px"
+          />
+        </div>
+        <div style="display: flex; gap: 12px; justify-content: flex-end">
+          <button
+            class="btn btn-secondary"
+            onclick="app.closeModal('categoryModal')"
+          >
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="app.saveCardCategory()">
+            Save Category
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="importModal">
+      <div class="modal">
+        <h2 class="modal-title">Import Flashcards</h2>
+        <div
+          class="import-zone"
+          id="importZone"
+          onclick="document.getElementById('importFile').click()"
+        >
+          <div style="font-size: 3rem; margin-bottom: 16px">📁</div>
+          <h3>Drop JSON file here or click to browse</h3>
+          <p style="color: var(--text-secondary); margin-top: 8px">
+            Supports JSON format
+          </p>
+          <input
+            type="file"
+            id="importFile"
+            accept=".json"
+            style="display: none"
+            onchange="app.readFile(this.files[0])"
+          />
+        </div>
+        <div style="margin-top: 20px">
+          <label class="form-label">Or paste JSON data:</label>
+          <textarea
+            class="form-textarea"
+            id="importData"
+            placeholder='[{"term": "Example", "definition": "A thing characteristic of its kind", "category": "General"}]'
+          ></textarea>
+        </div>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 20px;
+          "
+        >
+          <button
+            class="btn btn-secondary"
+            onclick="app.closeModal('importModal')"
+          >
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="app.importFromText()">
+            Import
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="generateCardModal">
+      <div class="modal" style="max-width: 700px">
+        <h2 class="modal-title">AI Card Generator</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 20px">
+          Paste a paragraph, notes, or a list of facts. Our AI will suggest
+          flashcards for you.
+        </p>
+
+        <div id="generatorInputStage">
+          <div class="form-group">
+            <textarea
+              class="form-textarea"
+              id="aiGenText"
+              placeholder="Example: The capital of France is Paris. The capital of Japan is Tokyo. Newton's second law states that Force equals mass times acceleration..."
+              style="min-height: 200px"
+            ></textarea>
+          </div>
+          <div style="display: flex; gap: 12px; justify-content: flex-end">
+            <button
+              class="btn btn-secondary"
+              onclick="app.closeModal('generateCardModal')"
+            >
+              Cancel
+            </button>
+            <button class="btn btn-primary" onclick="app.processAiGeneration()">
+              Generate Suggestions
+            </button>
+          </div>
+        </div>
+
+        <div id="generatorReviewStage" style="display: none">
+          <div class="form-group">
+            <label class="form-label">Review Suggested Cards</label>
+            <div id="aiGenResults" class="flashcard-list">
+              <!-- Generated cards will appear here -->
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              gap: 12px;
+              justify-content: flex-end;
+              margin-top: 20px;
+            "
+          >
+            <button class="btn btn-secondary" onclick="app.resetGenerator()">
+              Back to Text
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="app.confirmGeneratedCards()"
+            >
+              Add Selected Cards
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <div class="keyboard-hint">
+      <kbd>Space</kbd> Flip card &nbsp; <kbd>←</kbd><kbd>→</kbd> Navigate &nbsp;
+      <kbd>1-4</kbd> Rate card
+    </div>
+
+    <!-- Chat head widget -->
+    <button
+      class="chat-head"
+      id="chatHead"
+      onclick="app.toggleChatHead()"
+      aria-label="Open Corvus AI chat"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+    >
+      <img
+        class="chat-head-avatar"
+        src="assets/images/ai-profilee.png"
+        alt=""
+      />
+      <span class="chat-head-badge" id="chatHeadBadge" style="display: none"
+        >0</span
+      >
+    </button>
+<div class="scroll-container">
+    <div
+      class="chat-panel"
+      id="chatPanel"
+      role="dialog"
+      aria-label="Corvus AI chat"
+      aria-modal="false"
+    >
+      <div class="chat-panel-header">
+        <div class="ai-avatar">
+          <img class="ai-profile" src="assets/images/ai-profilee.png" alt="" />
+        </div>
+        <div class="header-text">
+          <p class="ai-name"><strong>Corvus AI</strong></p>
+          <p class="ai-status"></p>
+        </div>
+        <button
+          class="chat-panel-close"
+          onclick="app.closeChatHead()"
+          aria-label="Close chat"
+        >
+          <i class="material-icons">close</i>
+        </button>
+      </div>
+      <div class="ai-chat-messages" id="aiMessages">
+        <div class="message ai">
+          Hello! I'm your AI study assistant. I can help you understand
+          concepts, create quiz questions, or explain difficult topics. What
+          would you like to study today?
+        </div>
+      </div>
+      <div class="chat-quick-actions">
+        <button class="chat-chip" onclick="app.aiAction('generate')">
+          Generate Cards
+        </button>
+        <button class="chat-chip" onclick="app.aiAction('explain')">
+          Explain
+        </button>
+        <button class="chat-chip" onclick="app.aiAction('quiz')">
+          Quiz me
+        </button>
+        <button class="chat-chip" onclick="app.aiAction('tips')">Tips</button>
+        <button class="chat-chip" onclick="app.aiAction('summary')">
+          Progress
+        </button>
+      </div>
+      <div class="ai-chat-input">
+        <input
+          type="text"
+          id="aiInput"
+          placeholder="Ask me anything..."
+          onkeypress="if (event.key === 'Enter') app.sendAiMessage();"
+        />
+        <button class="btn btn-primary" onclick="app.sendAiMessage()">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+    <!-- Preferences modal -->
+    <div class="modal-overlay" id="prefsModal">
+      <div class="modal" style="max-width: 520px">
+        <h2 class="modal-title">Preferences</h2>
+
+        <div class="prefs-group">
+          <div class="prefs-group-title">Quiz</div>
+          <div class="prefs-row">
+            <label class="quiz-timer-toggle">
+              <input type="checkbox" id="quizTimerEnabled" />
+              <span class="timer-row"
+                ><i class="material-icons">timer</i> Timer per question</span
+              >
+            </label>
+            <select
+              class="form-input form-select"
+              id="quizTimerSeconds"
+              style="width: auto"
+            >
+              <option value="10">10s</option>
+              <option value="15">15s</option>
+              <option value="20" selected>20s</option>
+              <option value="30">30s</option>
+              <option value="60">60s</option>
+            </select>
+          </div>
+          <label class="quiz-timer-toggle" style="margin-top: 8px">
+            <input type="checkbox" id="quizMixedMode" />
+            <span>Mixed mode (random question types)</span>
+          </label>
+          <div class="prefs-row" style="margin-top: 8px">
+            <span>Question direction</span>
+            <select
+              class="form-input form-select"
+              id="quizDirection"
+              style="width: auto"
+              onchange="app.setCardDirection(this.value)"
+            >
+              <option value="term">Term → Definition</option>
+              <option value="def">Definition → Term</option>
+              <option value="mixed">Mixed (both ways)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="prefs-group">
+          <div class="prefs-group-title">Appearance</div>
+          <div class="text-size-slider">
+            <div class="head">
+              <span class="hint">Text size (cards &amp; quiz)</span>
+              <span class="value" id="value" aria-live="polite">Normal</span>
+            </div>
+            <div class="slider" id="slider" role="slider" tabindex="0" aria-label="Text size" aria-valuemin="0" aria-valuemax="3" aria-valuenow="1" aria-valuetext="Normal">
+              <div class="bar"></div>
+              <div class="fill" id="fill"></div>
+              <div id="dots"></div>
+              <div class="thumb" id="thumb"></div>
+            </div>
+            <div class="labels" id="labels"></div>
+            <p class="preview" id="preview">Sample text: this changes size with the slider.</p>
+          </div>
+        </div>
+
+        <div class="prefs-group">
+          <div class="prefs-group-title">Categories</div>
+          <div id="prefsCategoryList" class="prefs-category-list"></div>
+          <p
+            style="
+              font-size: 0.78rem;
+              color: var(--text-secondary);
+              margin-top: 8px;
+            "
+          >
+            Renaming or deleting a category updates all cards in it. Deleted
+            categories' cards become Uncategorized.
+          </p>
+        </div>
+
+        <div class="prefs-group">
+          <div class="prefs-group-title">Data</div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <button
+              class="btn btn-secondary"
+              onclick="
+                app.showImportModal();
+                app.closePrefs();
+              "
+            >
+              <img class="import-icon" src="assets/images/upload.png" /> Import
+            </button>
+            <button class="btn btn-secondary" onclick="app.exportCards()">
+              <img class="export-icon" src="assets/images/download.png" />
+              Export
+            </button>
+            <button
+              class="btn btn-danger"
+              onclick="
+                app.closePrefs();
+                showReset();
+              "
+            >
+              <i class="material-icons">delete</i>
+              Reset All
+            </button>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; margin-top: 20px">
+          <button class="btn btn-primary" onclick="app.closePrefs()">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dev tools (visible only with ?dev=1) -->
+    <button
+      class="dev-clear-cache"
+      id="devClearCache"
+      onclick="app.clearCacheAndReload()"
+      style="display: none"
+      aria-label="Clear cache and reload"
+    >
+      <i class="material-icons">refresh</i> Clear cache &amp; reload
+    </button>
+
+    <nav class="bottom-nav" id="bottomNav" aria-label="Primary navigation">
+      <button
+        class="bottom-nav-item active"
+        data-section="home"
+        onclick="app.showSection('home')"
+        aria-label="Home"
+        aria-current="page"
+      >
+        <i class="material-icons">home</i>
+        <span>Home</span>
+      </button>
+      <button
+        class="bottom-nav-item"
+        data-section="flashcards"
+        onclick="app.showSection('flashcards')"
+        aria-label="Flashcards"
+      >
+        <i class="material-icons">library_books</i>
+        <span>Cards</span>
+      </button>
+      <button
+        class="bottom-nav-item"
+        data-section="study"
+        onclick="app.showSection('study')"
+        aria-label="Study"
+      >
+        <i class="material-icons">school</i>
+        <span>Study</span>
+      </button>
+      <button
+        class="bottom-nav-item"
+        data-section="quiz"
+        onclick="app.showSection('quiz')"
+        aria-label="Quiz"
+      >
+        <i class="material-icons">quiz</i>
+        <span>Quiz</span>
+      </button>
+      <button
+        class="bottom-nav-item"
+        data-section="code"
+        onclick="app.showSection('code')"
+        aria-label="Code"
+      >
+        <i class="material-icons">code</i>
+        <span>Code</span>
+      </button>
+      <button
+        class="bottom-nav-item"
+        data-section="stats"
+        onclick="app.showSection('stats')"
+        aria-label="Stats"
+      >
+        <i class="material-icons">analytics</i>
+        <span>Stats</span>
+      </button>
+    </nav>
+
+  </body>
+</html>
