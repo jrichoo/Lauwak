@@ -1,4 +1,5 @@
 const http = require("http");
+const https = require("https");
 const fs = require("fs");
 const path = require("path");
 
@@ -446,9 +447,13 @@ function proxyToDjango(req, res, url) {
       "x-real-ip": clientIp(req),
       "x-forwarded-proto": req.headers["x-forwarded-proto"] || "http",
     };
-    const preq = http.request(
+    // Hosted installs reach Django over https, and Node's http module refuses
+    // an https URL outright ("Protocol https: not supported"), which would throw
+    // inside this handler and take the whole server down.
+    const api = DJANGO_URL.startsWith("https:") ? https : http;
+    const preq = api.request(
       new URL(url.pathname + url.search, DJANGO_URL),
-      { method: req.method, headers, timeout: 15000 },
+      { method: req.method, headers, timeout: 30000 },
       (pres) => {
         const out = {
           "Content-Type": pres.headers["content-type"] || "application/json",
@@ -464,7 +469,7 @@ function proxyToDjango(req, res, url) {
       if (!res.headersSent)
         json(res, 503, {
           error:
-            "Account server is offline. Start it with start.bat (Django on port 8000).",
+            "Account server isn't responding. It may be starting up — try again in a few seconds.",
         });
     });
     preq.end(body);
