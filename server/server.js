@@ -17,6 +17,7 @@ try {
     }
   });
 } catch {}
+
 const OLLAMA_HOST = process.env.OLLAMA_HOST || "http://localhost:11434";
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3.2:3b";
 const AI_PROVIDER = (process.env.AI_PROVIDER || "auto").toLowerCase();
@@ -221,6 +222,7 @@ async function callOpenRouter(messages, opts = {}) {
     headers: {
       "Content-Type": "application/json",
       Authorization: "Bearer " + OPENROUTER_KEY,
+
       "HTTP-Referer": "https://lauwak.local",
       "X-Title": "Lauwak",
     },

@@ -53,6 +53,7 @@ DATABASES = {}
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.PBKDF2PasswordHasher"]
 
 MONGODB_URI = os.environ.get("MONGODB_URI", "mongodb://127.0.0.1:27017")
+MONGODB_ATLAS_URI = os.environ.get("MONGODB_ATLAS_URI", "")
 MONGODB_DB = os.environ.get("MONGODB_DB", "lauwak")
 SESSION_DAYS = 30
 COOKIE_NAME = "lauwak_sid"

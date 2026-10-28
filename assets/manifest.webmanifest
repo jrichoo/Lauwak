@@ -11,14 +11,14 @@
   "categories": ["education", "productivity"],
   "icons": [
     {
-      "src": "/assets/icons/icon-192.png",
+      "src": "/assets/icons/icon-192.jpg",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
-      "src": "/assets/icons/icon-512.png",
+      "src": "/assets/icons/icon-512.jpg",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/jpeg"
     },
     {
       "src": "/assets/icons/icon-maskable-512.png",
@@ -27,9 +27,9 @@
       "purpose": "maskable"
     },
     {
-      "src": "/assets/icons/icon-180.png",
+      "src": "/assets/icons/icon-180.jpg",
       "sizes": "180x180",
-      "type": "image/png"
+      "type": "image/jpeg"
     }
   ]
 }

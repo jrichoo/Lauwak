@@ -1,4 +1,4 @@
-const CACHE_VERSION = "lauwak-v20";
+const CACHE_VERSION = "lauwak-v21";
 const APP_SHELL = [
   "/",
   "/index.html",
