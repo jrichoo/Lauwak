@@ -23,7 +23,7 @@ const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3.2:3b";
 const AI_PROVIDER = (process.env.AI_PROVIDER || "auto").toLowerCase();
 const OPENROUTER_KEY = process.env.OPENROUTER_API_KEY || "";
 const OPENROUTER_MODEL =
-  process.env.OPENROUTER_MODEL || "liquid/lfm-2.5-2.6b:free";
+  process.env.OPENROUTER_MODEL || "nvidia/nemotron-3.5-lightning:free";
 const OPENROUTER_BASE =
   process.env.OPENROUTER_BASE || "https://openrouter.ai/api/v1";
 const TRUST_PROXY = process.env.TRUST_PROXY === "1";

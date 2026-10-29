@@ -27,9 +27,6 @@
   }
 
   function toLogin() {
-    // The code pane is on the other face, so showStep never sees it being hidden:
-    // a code you walked away from would keep counting down in the background.
-    stopClock("verifyPane");
     card.classList.remove("flipped");
     showStep(front, "loginPane");
   }
@@ -39,16 +36,6 @@
     showStep(back, "verifyPane");
     card.classList.add("flipped");
     $("verifyCode").focus();
-  }
-
-  // A mistyped address or name is fixed at the form, not in front of a code that
-  // can never arrive. The typed values stay where they are to be corrected, and no
-  // account exists yet, so pressing Sign up simply replaces the waiting details.
-  function toSignup() {
-    showStep(back, "signupPane");
-    card.classList.add("flipped");
-    setMsg($("verifyMsg"), "", false);
-    $("signupName").focus();
   }
 
   function setMsg(el, text, ok) {
@@ -116,7 +103,15 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    return { status: r.status, data: await r.json().catch(() => ({})) };
+
+    const text = await r.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      console.warn(r.status, text.slice(0, 300));
+    }
+    return { status: r.status, data };
   }
 
   // The page's five flows are all the same three steps: grey the button out, ask
@@ -273,10 +268,7 @@
   }
 
   function resetBack() {
-    toLogin();
-    // That step is two screens on one button, so leaving it goes back to the first.
-    resetStep(false);
-    setMsg($("resetMsg"), "", false);
+    document.getElementById("resetPane").style.display = "none";
   }
 
   $("loginBtn").addEventListener("click", doLogin);
@@ -309,16 +301,11 @@
     $("resetEmail").focus();
   });
   $("resetBackBtn").addEventListener("click", resetBack);
-  // The flip links use the same steps as the buttons, so a face can never show the
-  // form you left and the form you came back to at the same time.
-  $("joinLink").addEventListener("click", toSignup);
-  $("loginLink").addEventListener("click", toLogin);
   $("verifyBackBtn").addEventListener("click", () => {
-    toLogin();
+    tologin();
     // The wrong-password message belongs to the log in step, not the code step.
     setMsg($("loginMsg"), "", false);
   });
-  $("verifyEditBtn").addEventListener("click", toSignup);
 
   // Codes are six digits, so a stray space or letter never reaches the server.
   ["resetCode", "verifyCode"].forEach((id) =>
