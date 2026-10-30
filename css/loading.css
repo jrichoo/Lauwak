@@ -1,0 +1,92 @@
+/* Boot screen: the Lauwak mark on a full-viewport panel until the app is ready.
+   Everything is scoped to #boot-screen, because an unscoped `html, body` or
+   `.container` rule here would take over the whole layout. */
+
+#boot-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: var(--bg);
+  opacity: 1;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
+}
+
+#boot-screen img {
+  width: 92px;
+  height: 92px;
+  border-radius: 22%;
+  animation: boot-breathe 1.8s ease-in-out infinite;
+}
+
+#boot-screen .boot-word {
+  font-family: var(--font-brand);
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+#boot-screen .boot-bar {
+  width: 132px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+#boot-screen .boot-bar::after {
+  content: "";
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--primary);
+  animation: boot-slide 1.2s ease-in-out infinite;
+}
+
+@keyframes boot-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.82;
+  }
+  50% {
+    transform: scale(1.07);
+    opacity: 1;
+  }
+}
+
+@keyframes boot-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+body.booting {
+  overflow: hidden;
+}
+
+#boot-screen.boot-done {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #boot-screen img,
+  #boot-screen .boot-bar::after {
+    animation: none;
+  }
+}
