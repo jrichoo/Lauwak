@@ -14,10 +14,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Lauwak" />
     <link rel="manifest" href="assets/manifest.webmanifest" />
-    <link rel="apple-touch-icon" href="assets/icons/icon-180.png" />
+    <link rel="apple-touch-icon" href="assets/icons/icon-180.jpg" />
     <meta name="color-scheme" content="light dark" />
     <title>Lauwak- Flashcards & Quizzes</title>
-    <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png" />
     <link rel="stylesheet" href="css/01-tokens.css" />
     <link rel="stylesheet" href="css/02-base.css" />
     <link rel="stylesheet" href="css/03-layout.css" />
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="css/11-preferences.css" />
     <link rel="stylesheet" href="css/12-flashcards-chat-cards.css" />
     <link rel="stylesheet" href="css/13-home.css" />
+    <link rel="stylesheet" href="css/loading.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -67,7 +68,30 @@
     <script src="js/code.js" defer></script>
     <script src="js/main.js" defer></script>
   </head>
-  <body>
+  <body class="booting">
+    <div id="boot-screen" role="status" aria-label="Loading Lauwak">
+      <img src="assets/icons/icon-192.png" alt="" />
+      <div class="boot-word">LAUWAK</div>
+      <div class="boot-bar"></div>
+    </div>
+    <script>
+      (function () {
+        var screen = document.getElementById("boot-screen");
+        var dismissed = false;
+        function hideBoot() {
+          if (dismissed) return;
+          dismissed = true;
+          screen.classList.add("boot-done");
+          document.body.classList.remove("booting");
+          setTimeout(function () {
+            screen.remove();
+          }, 400);
+        }
+        window.addEventListener("load", hideBoot);
+        // A stalled CDN request must never trap the visitor behind the panel.
+        setTimeout(hideBoot, 8000);
+      })();
+    </script>
     <header>
       <div class="header-content">
         <div class="logo">LAUWAK</div>
@@ -496,6 +520,7 @@
             <span style="color: #b23a2b" id="quizQuestionNum"
               >Question 1/10</span
             >
+            <div class="badges">
             <span class="streak-badge" id="quizStreak" style="display: none"
               ><img class="streak-icon" src="assets/images/fire-red.png" />
               0</span
@@ -503,6 +528,7 @@
             <span class="quiz-timer" id="quizTimer" style="display: none"
               >⏱ 20</span
             >
+            </div>
           </div>
           <div class="quiz-progress">
             <div

@@ -251,11 +251,11 @@
   .hd-session-focus {
     display: block;
     border: 0;
-    background: var(--primary-light);
-    color: var(--text);
+    background: var(--primary-hover);
+    color: white;
     font: inherit;
     font-size: 0.85rem;
-    font-weight: 600;
+
     padding: 8px 12px;
     border-radius: 10px;
     margin-bottom: 12px;
@@ -371,7 +371,7 @@
   background: var(--primary);
 }
 .hd-cal i.today {
-  outline: 2px solid var(--text);
+  outline: 2px solid var(--primary-hover);
   outline-offset: 1px;
 }
 .hd-cal-legend {

@@ -53,7 +53,6 @@
 
 .quiz-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -167,8 +166,8 @@ input[type="checkbox"] {
 }
 
 .quiz-header .quiz-timer.warning {
-  color: var(--danger);
-  background: var(--danger-light);
+  color: var(--primary);
+  background: var(--primary-hover);
   animation: timerPulse 1s ease-in-out infinite;
 }
 
@@ -198,4 +197,3 @@ input[type="checkbox"] {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-

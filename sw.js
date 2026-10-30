@@ -1,4 +1,4 @@
-const CACHE_VERSION = "lauwak-v22";
+const CACHE_VERSION = "lauwak-v23";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -19,6 +19,7 @@ const APP_SHELL = [
   "/css/11-preferences.css",
   "/css/12-flashcards-chat-cards.css",
   "/css/13-home.css",
+  "/css/loading.css",
   "/js/core.js",
   "/js/ui.js",
   "/js/cards.js",

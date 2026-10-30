@@ -160,7 +160,7 @@
   font-size: calc(1rem * var(--ts-scale));
 }
 :root[data-text-size] .flashcard-content {
-  font-size: calc(1.5rem * var(--ts-scale));
+  font-size: calc(1.1rem * var(--ts-scale));
 }
 :root[data-text-size] #studyDefinition {
   font-size: calc(1.15rem * var(--ts-scale));
@@ -340,7 +340,7 @@
 }
 
 .mascot-bubble::before {
-  bottom: -8px;
+  bottom: -9px;
   border-top: 9px solid var(--surface);
   z-index: 1;
 }

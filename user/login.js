@@ -116,7 +116,15 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
-    return { status: r.status, data: await r.json().catch(() => ({})) };
+    const text = await r.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = {};
+      console.warn(r.status, text.slice(0, 300));
+    }
+    return { status: r.status, data };
   }
 
   // The page's five flows are all the same three steps: grey the button out, ask

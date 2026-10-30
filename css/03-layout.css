@@ -247,6 +247,7 @@ header {
 
 .streak-icon {
   width: 30px;
+  margin-bottom: 5px;
 }
 .delete .trash-bin {
   width: 24px;

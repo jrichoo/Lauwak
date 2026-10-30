@@ -538,7 +538,7 @@ Object.assign(app, {
             `<option value="${this.escAttr(c)}">${this.escapeHtml(c)}</option>`,
         )
         .join("") +
-      `<option value="__new__"><i class="material-icons" style="margin-bottom: 3px; font-size: 18px;">add</i> Add new category</option>`;
+      `<option value="__new__"> + Add new category</option>`;
     select.value = "";
     const newInput = document.getElementById("categorySelectNew");
     newInput.style.display = "none";
